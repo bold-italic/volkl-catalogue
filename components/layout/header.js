@@ -3,38 +3,78 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-import AppBar from "@mui/material/AppBar";
 import logo from "../../public/logo.svg";
 
+import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
+import CssBaseline from "@mui/material/CssBaseline";
+import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import SearchIcon from "@mui/icons-material/Search";
 import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
 import Collapse from "@mui/material/Collapse";
-import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import Container from "@mui/material/Container";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import SearchIcon from "@mui/icons-material/Search";
+import Divider from "@mui/material/Divider";
 
-export default function Header() {
-  const [anchorElNav, setAnchorElNav] = useState(null);
+const skisCategories = [
+  { label: "RACING", link: "/racing" },
+  { label: "ALL MOUNTAIN", link: "/all-mountain-skis" },
+  { label: "FREERIDE", link: "/freeride-skis" },
+  { label: "FREESTYLE", link: "/freestyle-skis" },
+  { label: "JUNIOR", link: "/junior-skis" },
+  { label: "TOURING", link: "/touring-skis" },
+  { label: "ALL SKIS", link: "/all-skis" },
+];
+
+// CSS Styles
+const navProductsStyle = {
+  px: 3,
+  color: "white",
+  fontWeight: 700,
+  fontSize: 15,
+  letterSpacing: 1,
+  ":hover": {
+    color: "#ffed00",
+    textDecoration: "solid underline 2px",
+  },
+};
+
+const navSkisCategoriesStyle = {
+  px: 3,
+  fontWeight: 700,
+  fontSize: 15,
+  letterSpacing: 1,
+};
+
+const navDrawerProductsStyle = {
+  px: 2,
+  fontWeight: 800,
+  fontSize: 18,
+  letterSpacing: 1,
+};
+
+const navDrawerSkisCategoriesStyle = {
+  px: 2,
+  fontWeight: 700,
+  fontSize: 16,
+  letterSpacing: 1,
+};
+
+export default function HeaderNested() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [openMobileList, setOpenMobileList] = useState(false);
-
-  const handleOpenHamburger = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
 
   const open = Boolean(anchorEl);
 
@@ -52,168 +92,227 @@ export default function Header() {
     setOpenMobileList(!openMobileList);
   };
 
-  const skisCategories = [
-    { label: "RACING", link: "/" },
-    { label: "ALL MOUNTAIN", link: "/all-mountain-skis" },
-    { label: "FREERIDE", link: "/freeride-skis" },
-    { label: "FREESTYLE", link: "/freestyle-skis" },
-    { label: "JUNIOR", link: "/junior-skis" },
-    { label: "TOURING", link: "/touring-skis" },
-    { label: "ALL SKIS", link: "/all-skis" },
-  ];
-
-  // CSS Styles
-  const navProductStyle = {
-    px: 3,
-    color: "white",
-    fontWeight: 700,
-    fontSize: 15,
-    letterSpacing: 1,
-    ":hover": {
-      color: "#ffed00",
-      textDecoration: "solid underline 2px",
-    },
+  const handleDrawerToggle = () => {
+    setMobileOpen((prevState) => !prevState);
   };
 
-  const navSkisCategoriesStyle = {
-    px: 3,
-    fontWeight: 700,
-    fontSize: 15,
-    letterSpacing: 1,
+  const handleSKISClick = (event) => {
+    // Prevent closing when SKIS is clicked
+    event.stopPropagation();
+    handleClickMobileList();
   };
+
+  const handleNavItemClick = () => {
+    // Close the "SKIS" dropdown and the drawer when any navigation item is clicked
+    setOpenMobileList(false);
+    setMobileOpen(false);
+  };
+
+  const drawer = (
+    <Box>
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          backgroundColor: "black",
+          py: 2,
+        }}
+      >
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          onClick={handleNavItemClick}
+          sx={{
+            color: "white",
+            ml: 1,
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+
+        <Box
+          onClick={handleNavItemClick}
+          component={Link}
+          href="/"
+          sx={{
+            display: "flex",
+          }}
+        >
+          <Image src={logo} alt="Main Icon" priority />
+        </Box>
+
+        <IconButton
+          size="small"
+          aria-label="search"
+          color="inherit"
+          sx={{
+            mr: 1,
+            color: "white",
+          }}
+        >
+          <SearchIcon />
+        </IconButton>
+      </Container>
+
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton onClick={handleSKISClick}>
+            <ListItemText
+              primary="SKIS"
+              primaryTypographyProps={navDrawerProductsStyle}
+            />
+            {openMobileList ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+        </ListItem>
+        <Divider />
+        <Collapse in={openMobileList} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {/* Mapping the mobile submenu */}
+            {skisCategories.map((category) => (
+              <Box key={category.label}>
+                <ListItemButton
+                  onClick={handleNavItemClick}
+                  component={Link}
+                  href={category.link}
+                  sx={{
+                    px: 3,
+                    pl: 5,
+                  }}
+                >
+                  <ListItemText
+                    primary={category.label}
+                    primaryTypographyProps={navDrawerSkisCategoriesStyle}
+                  />
+                </ListItemButton>
+                <Divider />
+              </Box>
+            ))}
+          </List>
+        </Collapse>
+
+        <ListItemButton component={Link} href="/bindings">
+          <ListItemText
+            primary="BINDINGS"
+            primaryTypographyProps={navDrawerProductsStyle}
+          />
+        </ListItemButton>
+        <Divider />
+        <ListItemButton component={Link} href="/poles">
+          <ListItemText
+            primary="POLES"
+            primaryTypographyProps={navDrawerProductsStyle}
+          />
+        </ListItemButton>
+        <Divider />
+      </List>
+    </Box>
+  );
 
   return (
-    <AppBar
-      position="static"
-      sx={{
-        backgroundColor: "black",
-        py: 1,
-      }}
-    >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {/* Desktop view Menu */}
-          <Box
-            component={Link}
-            href="/"
-            sx={{ display: { xs: "none", md: "flex" }, mr: 8 }}
-          >
-            <Image src={logo} alt="Main Icon" priority />
-          </Box>
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: "black",
+          py: 1,
+        }}
+      >
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            {/* Desktop view Menu */}
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button onClick={handleClick} sx={navProductStyle}>
-              Skis
-            </Button>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-              sx={{ width: 500 }}
+            <Box
+              component={Link}
+              href="/"
+              sx={{ display: { xs: "none", md: "flex" }, mr: 8 }}
             >
-              {/* Mapping the submenu */}
-              {skisCategories.map((category) => (
-                <MenuItem
-                  component={Link}
-                  key={category.label}
-                  href={category.link}
-                  onClick={handleClose}
-                  sx={navSkisCategoriesStyle}
-                >
-                  {category.label}
-                </MenuItem>
-              ))}
-            </Menu>
-            <Button component={Link} href="/bindings" sx={navProductStyle}>
-              Bindings
-            </Button>
-            <Button component={Link} href="/poles" sx={navProductStyle}>
-              Poles
-            </Button>
-          </Box>
+              <Image src={logo} alt="Main Icon" priority />
+            </Box>
 
-          {/* Mobile view Menu */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              onClick={handleOpenHamburger}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              <List
-                sx={{ px: 3 }}
-                component="nav"
-                aria-labelledby="nested-list-subheader"
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              <Button onClick={handleClick} sx={navProductsStyle}>
+                Skis
+              </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+                sx={{ width: 500 }}
               >
-                <ListItemButton onClick={handleClickMobileList}>
-                  <ListItemText primary="SKIS" />
-                  {openMobileList ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={openMobileList} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    {/* Mapping the mobile submenu */}
-                    {skisCategories.map((category) => (
-                      <ListItemButton
-                        component={Link}
-                        key={category.label}
-                        href={category.link}
-                        sx={{
-                          px: 3,
-                          pl: 5,
-                        }}
-                      >
-                        <ListItemText primary={category.label} />
-                      </ListItemButton>
-                    ))}
-                  </List>
-                </Collapse>
-                <ListItemButton component={Link} href="/">
-                  <ListItemText primary="BINDINGS" />
-                </ListItemButton>
-                <ListItemButton component={Link} href="/">
-                  <ListItemText primary="POLES" />
-                </ListItemButton>
-              </List>
-            </Menu>
-          </Box>
+                {/* Mapping the submenu */}
+                {skisCategories.map((category) => (
+                  <MenuItem
+                    component={Link}
+                    key={category.label}
+                    href={category.link}
+                    onClick={handleClose}
+                    sx={navSkisCategoriesStyle}
+                  >
+                    {category.label}
+                  </MenuItem>
+                ))}
+              </Menu>
+              <Button component={Link} href="/bindings" sx={navProductsStyle}>
+                Bindings
+              </Button>
+              <Button component={Link} href="/poles" sx={navProductsStyle}>
+                Poles
+              </Button>
+            </Box>
 
-          <Box
-            component={Link}
-            href="/"
-            sx={{ display: { xs: "flex", md: "none" }, mr: 1, flexGrow: 1 }}
-          >
-            <Image src={logo} alt="Main Icon" priority />
-          </Box>
+            {/* Mobile view Menu */}
+            <Container
+              sx={{
+                display: { xs: "flex", md: "none" },
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                onClick={handleDrawerToggle}
+              >
+                <MenuIcon />
+              </IconButton>
 
-          <IconButton size="small" aria-label="search" color="inherit">
-            <SearchIcon />
-          </IconButton>
-        </Toolbar>
-      </Container>
-    </AppBar>
+              <Box component={Link} href="/" sx={{ display: "flex" }}>
+                <Image src={logo} alt="Main Icon" priority />
+              </Box>
+
+              <IconButton size="small" aria-label="search" color="inherit">
+                <SearchIcon />
+              </IconButton>
+            </Container>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        sx={{
+          display: { xs: "block", md: "none" },
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            width: "100%",
+          },
+        }}
+      >
+        {drawer}
+      </Drawer>
+    </Box>
   );
 }
