@@ -265,6 +265,14 @@ export default function Header() {
                 Poles
               </Button>
             </Box>
+            <IconButton
+              size="small"
+              aria-label="search"
+              color="inherit"
+              sx={{ display: { xs: "none", md: "flex" } }}
+            >
+              <SearchIcon />
+            </IconButton>
 
             {/* Mobile view Menu */}
             <Container
