@@ -12,7 +12,7 @@ const footerItems = [
 
 export default function Footer() {
   return (
-    <Box sx={{ display: "flex", backgroundColor: "#ffed00", py: 5 }}>
+    <Box sx={{ backgroundColor: "#ffed00", py: 5 }}>
       <Container maxWidth="xl" position="static">
         {/* Desktop view Menu */}
         <Stack
@@ -42,6 +42,7 @@ export default function Footer() {
           {footerItems.map((item) => (
             <Button
               key={item.label}
+              fullWidth="true"
               href={item.link}
               color="inherit"
               sx={{ fontWeight: 700, fontSize: 15 }}

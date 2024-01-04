@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../public/logo.svg";
+import logo from "../../assets/logo.svg";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -192,14 +192,22 @@ export default function Header() {
           </List>
         </Collapse>
 
-        <ListItemButton component={Link} href="/bindings">
+        <ListItemButton
+          onClick={handleNavItemClick}
+          component={Link}
+          href="/bindings"
+        >
           <ListItemText
             primary="BINDINGS"
             primaryTypographyProps={navDrawerProductsStyle}
           />
         </ListItemButton>
         <Divider />
-        <ListItemButton component={Link} href="/poles">
+        <ListItemButton
+          onClick={handleNavItemClick}
+          component={Link}
+          href="/poles"
+        >
           <ListItemText
             primary="POLES"
             primaryTypographyProps={navDrawerProductsStyle}
