@@ -1,9 +1,9 @@
 import Banner from "@/components/layout/banner";
 
-export default function Bindings() {
+export default function Racing() {
   return (
     <main>
-      <Banner bannerName="9" />
+      <Banner bannerName="2" />
     </main>
   );
 }

@@ -1,7 +1,9 @@
+import Banner from "@/components/layout/banner";
+
 export default function Home() {
   return (
     <main>
-      <p>Völkl Test Home Page</p>
+      <Banner bannerName="1" />
     </main>
   );
 }

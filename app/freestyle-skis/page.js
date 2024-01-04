@@ -1,9 +1,9 @@
 import Banner from "@/components/layout/banner";
 
-export default function Bindings() {
+export default function Freestyle() {
   return (
     <main>
-      <Banner bannerName="9" />
+      <Banner bannerName="5" />
     </main>
   );
 }

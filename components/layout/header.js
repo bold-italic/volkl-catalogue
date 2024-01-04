@@ -28,7 +28,7 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import SearchIcon from "@mui/icons-material/Search";
 
 const skisCategories = [
-  { label: "RACING", link: "/racing" },
+  { label: "RACING", link: "/racing-skis" },
   { label: "ALL MOUNTAIN", link: "/all-mountain-skis" },
   { label: "FREERIDE", link: "/freeride-skis" },
   { label: "FREESTYLE", link: "/freestyle-skis" },

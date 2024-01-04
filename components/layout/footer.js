@@ -42,7 +42,7 @@ export default function Footer() {
           {footerItems.map((item) => (
             <Button
               key={item.label}
-              fullWidth="true"
+              fullWidth={true}
               href={item.link}
               color="inherit"
               sx={{ fontWeight: 700, fontSize: 15 }}
