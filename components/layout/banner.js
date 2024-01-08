@@ -11,6 +11,9 @@ import poles_banner from "@/assets/10-poles_banner.webp";
 
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Button from "@mui/material/Button";
+import Link from "next/link";
 
 const banners = [
   {
@@ -98,6 +101,15 @@ const bannerNameStyle = {
   letterSpacing: 1,
 };
 
+const breadCrumbsStyle = {
+  fontWeight: 500,
+  fontSize: 17,
+  ":hover": {
+    color: "#ffed00",
+    textDecoration: "solid underline 1px",
+  },
+};
+
 function BannerHandler({ bannerId }) {
   const selectedBanner = banners.find((banner) => banner.id === bannerId);
 
@@ -123,6 +135,18 @@ function BannerHandler({ bannerId }) {
           <div>{selectedBanner.text}</div>
         </div>
       </Container>
+      {selectedBanner.id !== 1 && ( // Conditionally render breadcrumbs if id is not 1 (Home page)
+        <Container maxWidth="xl" sx={{ py: 0 }}>
+          <div key={selectedBanner.id}>
+            <Breadcrumbs aria-label="breadcrumb">
+              <Button component={Link} href="/" sx={breadCrumbsStyle}>
+                HOME
+              </Button>
+              <div color="primary">{selectedBanner.alt}</div>
+            </Breadcrumbs>
+          </div>
+        </Container>
+      )}
     </div>
   );
 }
