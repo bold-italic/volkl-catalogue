@@ -9,6 +9,7 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/system/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import PolesFilter from "@/components/poles/poles-filter";
 
 export default function Poles({ searchParams }) {
   const [products, setProducts] = useState([]);
@@ -35,7 +36,10 @@ export default function Poles({ searchParams }) {
           spacing={{ xs: 1, sm: 2, md: 2 }}
         >
           <Box width={{ md: "1100px" }} sx={{ backgroundColor: "yellow" }}>
-            FILTER BY:
+            <Box sx={{py:1}}>
+              <PolesFilter />
+            </Box>
+            
           </Box>
           <Box sx={{ flexGrow: 1 }}>
             <Box
