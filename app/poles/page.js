@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import Banner from "@/components/layout/banner";
 import { getAllProducts } from "@/lib/actions/poleActions";
 import ProductGrid from "@/components/product-grid";
+import Container from "@mui/material/Container";
+import Stack from "@mui/system/Stack";
+import Box from "@mui/material/Box";
 
 export default function Poles({ searchParams }) {
   const [products, setProducts] = useState([]);
@@ -23,7 +26,19 @@ export default function Poles({ searchParams }) {
   return (
     <main>
       <Banner bannerName="10" />
-      <ProductGrid products={products} />
+      <Container sx={{ py: 2 }} maxWidth="xl">
+        <Stack
+          direction={{ sm: "column", md: "row" }}
+          spacing={{ xs: 1, sm: 2, md: 2 }}
+        >
+          <Box width={{ md: "1100px" }} sx={{ backgroundColor: "yellow" }}>
+            Item 1
+          </Box>
+          <Box sx={{ flexGrow: 1, backgroundColor: "yellow" }}>
+            <ProductGrid products={products} />
+          </Box>
+        </Stack>
+      </Container>
     </main>
   );
 }
