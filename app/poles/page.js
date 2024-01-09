@@ -8,6 +8,7 @@ import ProductGrid from "@/components/product-grid";
 import Container from "@mui/material/Container";
 import Stack from "@mui/system/Stack";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 export default function Poles({ searchParams }) {
   const [products, setProducts] = useState([]);
@@ -36,13 +37,21 @@ export default function Poles({ searchParams }) {
           <Box width={{ md: "1100px" }} sx={{ backgroundColor: "yellow" }}>
             FILTER BY:
           </Box>
-          <Box sx={{ flexGrow: 1, backgroundColor: "yellow" }}>
-            <Box>
-              <Box>{products.length} items</Box>
+          <Box sx={{ flexGrow: 1 }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                py: 2,
+              }}
+            >
+              <Typography variant="h5" align="center">
+                {products.length} Items
+              </Typography>
               <Box>
                 <Sort />
               </Box>
-              <Box>---</Box>
             </Box>
             <ProductGrid products={products} />
           </Box>

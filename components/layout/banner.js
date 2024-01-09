@@ -106,8 +106,7 @@ const breadCrumbsStyle = {
   fontWeight: 500,
   fontSize: 17,
   ":hover": {
-    color: "#ffed00",
-    textDecoration: "solid underline 1px",
+    textDecoration: "solid underline 2px",
   },
 };
 
