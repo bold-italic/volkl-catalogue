@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import Banner from "@/components/layout/banner";
 import { getAllProducts } from "@/lib/actions/poleActions";
+import Sort from "@/components/sort";
+
 import ProductGrid from "@/components/product-grid";
 import Container from "@mui/material/Container";
 import Stack from "@mui/system/Stack";
@@ -32,9 +34,16 @@ export default function Poles({ searchParams }) {
           spacing={{ xs: 1, sm: 2, md: 2 }}
         >
           <Box width={{ md: "1100px" }} sx={{ backgroundColor: "yellow" }}>
-            Item 1
+            FILTER BY:
           </Box>
           <Box sx={{ flexGrow: 1, backgroundColor: "yellow" }}>
+            <Box>
+              <Box>{products.length} items</Box>
+              <Box>
+                <Sort />
+              </Box>
+              <Box>---</Box>
+            </Box>
             <ProductGrid products={products} />
           </Box>
         </Stack>

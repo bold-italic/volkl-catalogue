@@ -1,13 +1,13 @@
 import { useRouter, useSearchParams } from "next/navigation";
 
-const useCustomRouter = () => {
+export default function useCustomRouter() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = {};
   let search = searchParams.get("search");
-  let sort = searchParams.get('sort')
+  let sort = searchParams.get("sort");
   if (search) query.search = search;
-  if(sort) query.sort = sort; 
+  if (sort) query.sort = sort;
 
   const pushQuery = ({ search, sort }) => {
     if (search !== undefined) {
@@ -15,17 +15,16 @@ const useCustomRouter = () => {
     }
 
     if (sort !== undefined) {
-      sort === 'name' ? delete query.sort : (query.sort = sort);
+      sort === "name" ? delete query.sort : (query.sort = sort);
     }
 
     const newQuery = new URLSearchParams(query).toString();
 
-    router.push(`/?${newQuery}`)
+    // Check if sort is present, and adjust the URL accordingly
+    const route = sort ? `?${newQuery}` : `/?${newQuery}`;
 
-    console.log(newQuery, query)
+    router.push(route);
   };
 
   return { pushQuery, query };
-};
-
-export default useCustomRouter;
+}

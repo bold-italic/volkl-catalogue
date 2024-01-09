@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import main_banner from "@/assets/01-main_banner.webp";
 import racing_banner from "@/assets/02-racing_banner.webp";
 import all_mountain_banner from "@/assets/03-all_mountain_banner.webp";
@@ -13,7 +15,6 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Button from "@mui/material/Button";
-import Link from "next/link";
 
 const banners = [
   {
