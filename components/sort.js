@@ -1,5 +1,5 @@
+import React, { useState } from "react";
 import useCustomRouter from "./useCustomRouter";
-
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -7,13 +7,19 @@ import Select from "@mui/material/Select";
 
 export default function Sort() {
   const { pushQuery, query } = useCustomRouter();
+  const [selectedSort, setSelectedSort] = useState("");
+
+  const handleSortChange = (e) => {
+    setSelectedSort(e.target.value);
+    pushQuery({ sort: e.target.value });
+  };
 
   return (
-    <FormControl sx={{minWidth: 140 }}>
+    <FormControl sx={{ minWidth: 160 }}>
       <InputLabel>SORT BY:</InputLabel>
       <Select
-        value={query.sort || "name"}
-        onChange={(e) => pushQuery({ sort: e.target.value })}
+        value={selectedSort || query.sort || ""}
+        onChange={handleSortChange}
         label="SORT BY:"
       >
         <MenuItem value="name">Name A-Z</MenuItem>

@@ -6,10 +6,8 @@ import Sort from "@/components/sort";
 
 import ProductGrid from "@/components/product-grid";
 import Container from "@mui/material/Container";
-import Stack from "@mui/system/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import PolesFilter from "@/components/poles/poles-filter";
 
 export default function Poles({ searchParams }) {
   const [products, setProducts] = useState([]);
@@ -20,7 +18,10 @@ export default function Poles({ searchParams }) {
 
   const fetchProducts = async () => {
     try {
-      const { poles } = await getAllProducts({ ...searchParams, poleLength: searchParams.poleLength || [] });
+      const { poles } = await getAllProducts({
+        ...searchParams,
+        poleLength: searchParams.poleLength || [],
+      });
       setProducts(poles);
     } catch (error) {
       console.log(error);
@@ -31,35 +32,24 @@ export default function Poles({ searchParams }) {
     <main>
       <Banner bannerName="10" />
       <Container sx={{ py: 2 }} maxWidth="xl">
-        <Stack
-          direction={{ sm: "column", md: "row" }}
-          spacing={{ xs: 1, sm: 2, md: 2 }}
-        >
-          <Box width={{ md: "1100px" }} sx={{ backgroundColor: "yellow" }}>
-            <Box sx={{py:1}}>
-              <PolesFilter />
+        <Box sx={{ flexGrow: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              py: 2,
+            }}
+          >
+            <Typography variant="h5" align="center">
+              {products.length} Items
+            </Typography>
+            <Box>
+              <Sort />
             </Box>
-            
           </Box>
-          <Box sx={{ flexGrow: 1 }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                py: 2,
-              }}
-            >
-              <Typography variant="h5" align="center">
-                {products.length} Items
-              </Typography>
-              <Box>
-                <Sort />
-              </Box>
-            </Box>
-            <ProductGrid products={products} />
-          </Box>
-        </Stack>
+          <ProductGrid products={products} />
+        </Box>
       </Container>
     </main>
   );
