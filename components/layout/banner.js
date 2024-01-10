@@ -105,6 +105,7 @@ const bannerNameStyle = {
 const breadCrumbsStyle = {
   fontWeight: 500,
   fontSize: 17,
+  paddingLeft: 0,
   ":hover": {
     textDecoration: "solid underline 2px",
   },

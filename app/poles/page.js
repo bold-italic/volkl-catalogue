@@ -18,10 +18,7 @@ export default function Poles({ searchParams }) {
 
   const fetchProducts = async () => {
     try {
-      const { poles } = await getAllProducts({
-        ...searchParams,
-        poleLength: searchParams.poleLength || [],
-      });
+      const { poles } = await getAllProducts(searchParams);
       setProducts(poles);
     } catch (error) {
       console.log(error);
@@ -31,14 +28,14 @@ export default function Poles({ searchParams }) {
   return (
     <main>
       <Banner bannerName="10" />
-      <Container sx={{ py: 2 }} maxWidth="xl">
+      <Container sx={{ pb: 3 }} maxWidth="xl">
         <Box sx={{ flexGrow: 1 }}>
           <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              py: 2,
+              pb: 2,
             }}
           >
             <Typography variant="h5" align="center">

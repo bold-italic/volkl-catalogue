@@ -6,13 +6,10 @@ export default function useCustomRouter() {
   const query = {};
   let search = searchParams.get("search");
   let sort = searchParams.get("sort");
-  let poleLength = searchParams.get("poleLength");
-
   if (search) query.search = search;
   if (sort) query.sort = sort;
-  if (poleLength) query.poleLength = poleLength;
 
-  const pushQuery = ({ search, sort, poleLength }) => {
+  const pushQuery = ({ search, sort }) => {
     if (search !== undefined) {
       search === "" ? delete query.search : (query.search = search);
     }
@@ -21,14 +18,10 @@ export default function useCustomRouter() {
       sort === "name" ? delete query.sort : (query.sort = sort);
     }
 
-    if (poleLength !== undefined) {
-      poleLength === "" ? delete query.poleLength : (query.poleLength = poleLength);
-    }
-
     const newQuery = new URLSearchParams(query).toString();
 
     // Check if sort is present, and adjust the URL accordingly
-    const route = sort || poleLength ? `?${newQuery}` : `/?${newQuery}`;
+    const route = sort ? `?${newQuery}` : `/?${newQuery}`;
 
     router.push(route);
   };
