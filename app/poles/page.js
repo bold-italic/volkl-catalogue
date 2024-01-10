@@ -20,7 +20,7 @@ export default function Poles({ searchParams }) {
 
   const fetchProducts = async () => {
     try {
-      const { poles } = await getAllProducts(searchParams);
+      const { poles } = await getAllProducts({ ...searchParams, poleLength: searchParams.poleLength || [] });
       setProducts(poles);
     } catch (error) {
       console.log(error);

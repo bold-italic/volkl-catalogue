@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import useCustomRouter from "@/components/useCustomRouter";
+
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -28,16 +30,18 @@ for (let i = 70; i <= 135; i += 5) {
 }
 
 export default function PolesFilter() {
-  const [poleLength, setPoleLength] = useState([]);
+  const { pushQuery, query } = useCustomRouter();
+  const [poleLength, setPoleLength] = useState(query.poleLength || []);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setPoleLength(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+
+    setPoleLength(typeof value === "string" ? value.split(",") : value);
+
+    // Update query parameters
+    pushQuery({ poleLength: value });
   };
 
   return (
