@@ -6,7 +6,6 @@ import Sort from "@/components/sort";
 
 import ProductGrid from "@/components/product-grid";
 import Container from "@mui/material/Container";
-import Stack from "@mui/system/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
@@ -30,32 +29,24 @@ export default function Poles({ searchParams }) {
     <main>
       <Banner bannerName="10" />
       <Container sx={{ py: 2 }} maxWidth="xl">
-        <Stack
-          direction={{ sm: "column", md: "row" }}
-          spacing={{ xs: 1, sm: 2, md: 2 }}
-        >
-          <Box width={{ md: "1100px" }} sx={{ backgroundColor: "yellow" }}>
-            FILTER BY:
-          </Box>
-          <Box sx={{ flexGrow: 1 }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                py: 2,
-              }}
-            >
-              <Typography variant="h5" align="center">
-                {products.length} Items
-              </Typography>
-              <Box>
-                <Sort />
-              </Box>
+        <Box sx={{ flexGrow: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              py: 2,
+            }}
+          >
+            <Typography variant="h5" align="center">
+              {products.length} Items
+            </Typography>
+            <Box>
+              <Sort />
             </Box>
-            <ProductGrid products={products} />
           </Box>
-        </Stack>
+          <ProductGrid products={products} />
+        </Box>
       </Container>
     </main>
   );
