@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Banner from "@/components/layout/banner";
-import { getAllProducts } from "@/lib/actions/poleActions";
+import { getAllProducts } from "@/lib/actions/pole-actions";
 import ProductGrid from "@/components/product-grid";
 import Sort from "@/components/sort";
 

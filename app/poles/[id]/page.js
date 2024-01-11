@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { getOneProduct } from "@/lib/actions/poleActions";
+import { getOneProduct } from "@/lib/actions/pole-actions";
 import PoleGrid from "@/components/poles/pole-grid";
 import SpecsGrid from "@/components/specs-grid";
 
