@@ -19,7 +19,7 @@ export default function ProductGrid({ products }) {
           md={4}
           component={Link}
           href={{
-            pathname: `/product/${product?._id}`,
+            pathname: `/${product?.tag}/${product?._id}`,
             query: { name: product?.name },
           }}
           sx={{

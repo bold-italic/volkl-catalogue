@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react";
 import Banner from "@/components/layout/banner";
 import { getAllProducts } from "@/lib/actions/poleActions";
+import ProductGrid from "@/components/product-grid";
 import Sort from "@/components/sort";
 
-import ProductGrid from "@/components/product-grid";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
