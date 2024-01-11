@@ -11,15 +11,7 @@ export default function PoleGrid({ poles }) {
   return (
     <Grid container spacing={2}>
       {images.map((image, index) => (
-        <Grid
-          item
-          key={index}
-          xs={12}
-          sm={6}
-          md={4}
-          component={Link}
-          href={image}
-        >
+        <Grid item key={index} xs={12} sm={6} md={4}>
           <Card
             sx={{
               height: "100%",

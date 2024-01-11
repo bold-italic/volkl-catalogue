@@ -45,9 +45,9 @@ export default function ProductGrid({ products }) {
               <CardContent>
                 <Typography
                   gutterBottom
-                  variant="h7"
-                  component="h2"
+                  variant="h5"
                   align="center"
+                  sx={{ fontWeight: 600, letterSpacing: 1 }}
                 >
                   {product.name}
                 </Typography>

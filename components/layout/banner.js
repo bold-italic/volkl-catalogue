@@ -15,6 +15,8 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 
 const banners = [
   {
@@ -96,12 +98,6 @@ const containerStyle = {
   padding: 0,
 };
 
-const bannerNameStyle = {
-  fontWeight: 900,
-  fontSize: 30,
-  letterSpacing: 1,
-};
-
 const breadCrumbsStyle = {
   fontWeight: 500,
   fontSize: 17,
@@ -132,8 +128,16 @@ function BannerHandler({ bannerId }) {
       </Container>
       <Container maxWidth="xl" sx={{ py: 2 }}>
         <div key={selectedBanner.id}>
-          <div style={bannerNameStyle}>{selectedBanner.alt}</div>
-          <div>{selectedBanner.text}</div>
+          <Typography
+            variant="h4"
+            sx={{ py: 1, fontWeight: 800, letterSpacing: 1 }}
+          >
+            {selectedBanner.alt}
+          </Typography>
+          <Divider />
+          <Typography variant="h6" sx={{ py: 3 }}>
+            {selectedBanner.text}
+          </Typography>
         </div>
       </Container>
       {selectedBanner.id !== 1 && ( // Conditionally render breadcrumbs if id is not 1 (Home page)
