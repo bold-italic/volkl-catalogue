@@ -32,7 +32,6 @@ const skisCategories = [
   { label: "ALL MOUNTAIN", link: "/all-mountain-skis" },
   { label: "FREERIDE", link: "/freeride-skis" },
   { label: "FREESTYLE", link: "/freestyle-skis" },
-  { label: "JUNIOR", link: "/junior-skis" },
   { label: "TOURING", link: "/touring-skis" },
   { label: "ALL SKIS", link: "/all-skis" },
 ];

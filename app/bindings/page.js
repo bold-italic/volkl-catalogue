@@ -27,7 +27,7 @@ export default function Bindings({ searchParams }) {
 
   return (
     <main>
-      <Banner bannerName="9" />
+      <Banner bannerName="8" />
       <Container sx={{ pb: 6 }} maxWidth="xl">
         <Box sx={{ flexGrow: 1 }}>
           <Box

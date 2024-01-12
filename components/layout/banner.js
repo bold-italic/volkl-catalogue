@@ -5,11 +5,10 @@ import racing_banner from "@/assets/02-racing_banner.webp";
 import all_mountain_banner from "@/assets/03-all_mountain_banner.webp";
 import freeride_banner from "@/assets/04-freeride_banner.webp";
 import freestyle_banner from "@/assets/05-freestyle_banner.webp";
-import junior_banner from "@/assets/06-junior_banner.webp";
-import touring_banner from "@/assets/07-touring_banner.webp";
-import all_skis_banner from "@/assets/08-all_skis_banner.webp";
-import binding_banner from "@/assets/09-binding_banner.webp";
-import poles_banner from "@/assets/10-poles_banner.webp";
+import touring_banner from "@/assets/06-touring_banner.webp";
+import all_skis_banner from "@/assets/07-all_skis_banner.webp";
+import binding_banner from "@/assets/08-binding_banner.webp";
+import poles_banner from "@/assets/09-poles_banner.webp";
 
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
@@ -51,30 +50,24 @@ const banners = [
   },
   {
     id: 6,
-    image: junior_banner,
-    alt: "JUNIOR SKIS",
-    text: "Völkl's Junior models are tailored to the riding needs of developing skiers, from first-timers to budding all mountain and park skiers.",
-  },
-  {
-    id: 7,
     image: touring_banner,
     alt: "TOURING",
     text: "Völkl's touring products merge the lightest possible weight specifications with category-defying performance on the descent.",
   },
   {
-    id: 8,
+    id: 7,
     image: all_skis_banner,
     alt: "ALL SKIS",
     text: "",
   },
   {
-    id: 9,
+    id: 8,
     image: binding_banner,
     alt: "ALL BINDINGS",
     text: "Völkl poles seamlessly integrate cutting-edge performance features with unparalleled style, making them the ideal choice for skiers in every category.",
   },
   {
-    id: 10,
+    id: 9,
     image: poles_banner,
     alt: "POLES",
     text: "Make your day Phantastick! Blending the ultimate style with state of the art performance features, Völkl poles complete the package for all categories of skiing.",
@@ -168,8 +161,7 @@ export default function Banner({ bannerName }) {
     bannerId === 6 ||
     bannerId === 7 ||
     bannerId === 8 ||
-    bannerId === 9 ||
-    bannerId === 10
+    bannerId === 9
   ) {
     return <BannerHandler bannerId={bannerId} />;
   }
