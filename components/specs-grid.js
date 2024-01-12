@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 export default function SpecsGrid({ field, value }) {
   return (
     <Box>
-      <Box sx={{ display: "flex", py: 2 }}>
+      <Box sx={{ display: "flex", py: 1.5 }}>
         <Box>
           <Typography sx={{ fontWeight: 600, letterSpacing: 1 }}>
             {field}

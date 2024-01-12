@@ -3,8 +3,8 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 
-export default function PoleGrid({ poles }) {
-  const images = poles.image || [];
+export default function BindingGrid({ bindings }) {
+  const images = bindings.image || [];
 
   return (
     <Grid container spacing={2}>
@@ -18,7 +18,7 @@ export default function PoleGrid({ poles }) {
             }}
           >
             <CardActionArea>
-              <CardMedia component="img" image={image} alt={poles.name} />
+              <CardMedia component="img" image={image} alt={bindings.name} />
             </CardActionArea>
           </Card>
         </Grid>

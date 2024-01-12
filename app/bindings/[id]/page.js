@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { getOneProduct } from "@/lib/actions/pole-actions";
-import PoleGrid from "@/components/poles/pole-grid";
+import { getOneProduct } from "@/lib/actions/binding-actions";
+import BindingGrid from "@/components/bindings/binding-grid";
 import SpecsGrid from "@/components/specs-grid";
 
 import Container from "@mui/material/Container";
@@ -10,13 +10,17 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 
-export default function PoleView() {
+export default function BindingView() {
   const pathname = usePathname();
   const id = pathname.split("/")[2];
 
   const [productData, setProductData] = useState({});
   const sizes = productData.size || [];
   const colors = productData.color || [];
+  const category = productData.category || [];
+  const age = productData.age || [];
+  const bindingWeight = productData.bindingWeight || [];
+  const range = productData.range || [];
 
   useEffect(() => {
     fetchProduct();
@@ -24,8 +28,8 @@ export default function PoleView() {
 
   const fetchProduct = async () => {
     try {
-      const pole = await getOneProduct(id);
-      setProductData(pole);
+      const binding = await getOneProduct(id);
+      setProductData(binding);
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +46,7 @@ export default function PoleView() {
           {productData.name}
         </Typography>
         <Box sx={{ py: 2 }}>
-          <PoleGrid poles={productData} />
+          <BindingGrid bindings={productData} />
         </Box>
 
         <Typography
@@ -68,6 +72,10 @@ export default function PoleView() {
 
         <SpecsGrid field="SIZE" value={sizes.join(", ")} />
         <SpecsGrid field="COLOR" value={colors.sort().join(", ")} />
+        <SpecsGrid field="CATEGORY" value={category} />
+        <SpecsGrid field="AGE" value={age} />
+        <SpecsGrid field="BINDING WEIGHT" value={bindingWeight} />
+        <SpecsGrid field="DIN/ISO RANGE" value={range} />
       </Container>
     </main>
   );

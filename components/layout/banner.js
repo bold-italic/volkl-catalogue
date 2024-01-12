@@ -130,7 +130,7 @@ function BannerHandler({ bannerId }) {
         <div key={selectedBanner.id}>
           <Typography
             variant="h4"
-            sx={{ py: 1, fontWeight: 800, letterSpacing: 1 }}
+            sx={{ pb: 1, pt: 4, fontWeight: 800, letterSpacing: 1 }}
           >
             {selectedBanner.alt}
           </Typography>

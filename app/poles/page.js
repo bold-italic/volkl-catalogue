@@ -28,7 +28,7 @@ export default function Poles({ searchParams }) {
   return (
     <main>
       <Banner bannerName="10" />
-      <Container sx={{ pb: 3 }} maxWidth="xl">
+      <Container sx={{ pb: 6 }} maxWidth="xl">
         <Box sx={{ flexGrow: 1 }}>
           <Box
             sx={{
