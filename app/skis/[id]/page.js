@@ -16,6 +16,13 @@ export default function SkiView() {
 
   const [productData, setProductData] = useState({});
   const sizes = productData.size || [];
+  const category = productData.category || [];
+  const rocker = productData.rocker || [];
+  const core = productData.core || [];
+  const base = productData.base || [];
+  const age = productData.age || [];
+  const genders = productData.gender || [];
+  const skiingLevels = productData.skiingLevel || [];
 
   useEffect(() => {
     fetchProduct();
@@ -66,6 +73,13 @@ export default function SkiView() {
         <Divider sx={{ mb: 4 }} />
 
         <SpecsGrid field="SIZE" value={sizes.join(", ")} />
+        <SpecsGrid field="CATEGORY" value={category} />
+        <SpecsGrid field="ROCKER" value={rocker} />
+        <SpecsGrid field="CORE" value={core} />
+        <SpecsGrid field="BASE" value={base} />
+        <SpecsGrid field="AGE" value={age} />
+        <SpecsGrid field="GENDER" value={genders.join(", ")} />
+        <SpecsGrid field="SKIING LEVEL" value={skiingLevels.join(", ")} />
       </Container>
     </main>
   );
