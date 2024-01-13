@@ -20,6 +20,8 @@ export default function PoleView() {
 
   useEffect(() => {
     fetchProduct();
+    // Scroll to the top when the component mounts
+    window.scrollTo(0, 0);
   }, [id]);
 
   const fetchProduct = async () => {

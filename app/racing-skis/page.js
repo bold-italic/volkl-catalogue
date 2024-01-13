@@ -14,6 +14,8 @@ export default function Racing({ searchParams }) {
 
   useEffect(() => {
     fetchProducts();
+    // Scroll to the top when the component mounts
+    window.scrollTo(0, 0);
   }, [searchParams]);
 
   const fetchProducts = async () => {
