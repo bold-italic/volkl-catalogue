@@ -21,7 +21,7 @@ export default function useCustomRouter() {
     const newQuery = new URLSearchParams(query).toString();
 
     // Check if sort is present, and adjust the URL accordingly
-    const route = sort ? `?${newQuery}` : `/?${newQuery}`;
+    const route = sort ? `?${newQuery}` : `?${newQuery}`;
 
     router.push(route);
   };

@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 import logo from "../../assets/logo.svg";
+import useCustomRouter from "../useCustomRouter";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -19,6 +20,8 @@ import Collapse from "@mui/material/Collapse";
 import Container from "@mui/material/Container";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import InputBase from "@mui/material/InputBase";
+import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -74,15 +77,17 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMobileList, setOpenMobileList] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
+
+  const formRef = useRef();
+  const { pushQuery, query } = useCustomRouter();
 
   const open = Boolean(anchorEl);
 
-  // 1
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  // 2
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -106,6 +111,36 @@ export default function Header() {
     setOpenMobileList(false);
     setMobileOpen(false);
   };
+
+  const handleSearch = (formData) => {
+    const search = formData.get("search");
+    formRef.current.reset();
+    pushQuery({ search });
+    setIsSearch(false);
+  };
+
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if the click is outside the search toolbar
+      if (
+        isSearch &&
+        formRef.current &&
+        !formRef.current.contains(event.target)
+      ) {
+        setIsSearch(false);
+      }
+    };
+
+    // Attach the event listener to the document body
+    document.body.addEventListener("click", handleClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.body.removeEventListener("click", handleClickOutside);
+    };
+  }, [isSearch]);
 
   const drawer = (
     <Box>
@@ -148,7 +183,6 @@ export default function Header() {
           color="inherit"
           sx={{
             mr: 1,
-            color: "white",
           }}
         >
           <SearchIcon />
@@ -273,6 +307,7 @@ export default function Header() {
               </Button>
             </Box>
             <IconButton
+              onClick={() => setIsSearch(!isSearch)}
               size="small"
               aria-label="search"
               color="inherit"
@@ -302,11 +337,46 @@ export default function Header() {
                 <Image src={logo} alt="Main Icon" priority />
               </Box>
 
-              <IconButton size="small" aria-label="search" color="inherit">
+              <IconButton
+                onClick={() => setIsSearch(!isSearch)}
+                size="small"
+                aria-label="search"
+                color="inherit"
+              >
                 <SearchIcon />
               </IconButton>
             </Container>
           </Toolbar>
+          {isSearch ? (
+            <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
+              <Paper
+                component="form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSearch(new FormData(e.target));
+                }}
+                ref={formRef}
+                sx={{
+                  p: "2px 4px",
+                  display: "flex",
+                  alignItems: "center",
+                  width: 400,
+                }}
+              >
+                <InputBase
+                  type="search"
+                  name="search"
+                  defaultValue={query.search || ""}
+                  sx={{ ml: 1, flex: 1 }}
+                  placeholder="Search..."
+                  inputProps={{ "aria-label": "search" }}
+                />
+                <IconButton type="submit" sx={{ p: "6px" }} aria-label="search">
+                  <SearchIcon />
+                </IconButton>
+              </Paper>
+            </Toolbar>
+          ) : null}
         </Container>
       </AppBar>
 
