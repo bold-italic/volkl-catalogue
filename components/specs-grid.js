@@ -19,7 +19,7 @@ export default function SpecsGrid({ field, value }) {
             pl: 5,
           }}
         >
-          <Typography>{value}</Typography>
+          <Typography align="right">{value}</Typography>
         </Box>
       </Box>
       <Divider />
