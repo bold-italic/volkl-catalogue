@@ -218,9 +218,9 @@ export default function Header() {
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", py: 4.5 }}>
       <AppBar
-        position="static"
+        position="fixed"
         sx={{
           backgroundColor: "black",
           py: 1,
