@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Banner from "@/components/layout/banner";
-import { getAllProducts } from "@/lib/actions/ski-actions";
+import { getAllProducts } from "@/lib/actions/product-actions";
 import ProductGrid from "@/components/product-grid";
 
 import Container from "@mui/material/Container";
@@ -18,11 +18,11 @@ export default function Home({ searchParams }) {
 
   const fetchProducts = async () => {
     try {
-      const { skis } = await getAllProducts({
+      const { products } = await getAllProducts({
         ...searchParams,
         featured: true,
       });
-      setProducts(skis);
+      setProducts(products);
     } catch (error) {
       console.log(error);
     }

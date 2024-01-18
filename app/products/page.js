@@ -9,7 +9,7 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-export default function Racing({ searchParams }) {
+export default function AllProducts({ searchParams }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -22,8 +22,6 @@ export default function Racing({ searchParams }) {
     try {
       const { products } = await getAllProducts({
         ...searchParams,
-        tag: "skis",
-        category: "Racing",
       });
       setProducts(products);
     } catch (error) {
@@ -33,7 +31,7 @@ export default function Racing({ searchParams }) {
 
   return (
     <main>
-      <Banner bannerName="2" />
+      <Banner bannerName="1" />
       <Container sx={{ pb: 6 }} maxWidth="xl">
         <Box sx={{ flexGrow: 1 }}>
           <Box

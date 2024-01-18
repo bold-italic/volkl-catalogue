@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Banner from "@/components/layout/banner";
-import { getAllProducts } from "@/lib/actions/binding-actions";
+import { getAllProducts } from "@/lib/actions/product-actions";
 import ProductGrid from "@/components/product-grid";
 import Sort from "@/components/sort";
 
@@ -20,8 +20,11 @@ export default function Bindings({ searchParams }) {
 
   const fetchProducts = async () => {
     try {
-      const { bindings } = await getAllProducts(searchParams);
-      setProducts(bindings);
+      const { products } = await getAllProducts({
+        ...searchParams,
+        tag: "bindings",
+      });
+      setProducts(products);
     } catch (error) {
       console.log(error);
     }

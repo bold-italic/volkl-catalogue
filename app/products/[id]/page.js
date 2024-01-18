@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { getOneProduct } from "@/lib/actions/pole-actions";
-import PoleGrid from "@/components/poles/pole-grid";
+import { getOneProduct } from "@/lib/actions/product-actions";
+import PhotoGrid from "@/components/photo-grid";
 import SpecsGrid from "@/components/specs-grid";
 
 import Container from "@mui/material/Container";
@@ -10,13 +10,19 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 
-export default function PoleView() {
+export default function ProductView() {
   const pathname = usePathname();
   const id = pathname.split("/")[2];
 
   const [productData, setProductData] = useState({});
   const sizes = productData.size || [];
-  const colors = productData.color || [];
+  const category = productData.category || [];
+  const rocker = productData.rocker || [];
+  const core = productData.core || [];
+  const base = productData.base || [];
+  const age = productData.age || [];
+  const genders = productData.gender || [];
+  const skiingLevels = productData.skiingLevel || [];
 
   useEffect(() => {
     fetchProduct();
@@ -26,8 +32,8 @@ export default function PoleView() {
 
   const fetchProduct = async () => {
     try {
-      const pole = await getOneProduct(id);
-      setProductData(pole);
+      const product = await getOneProduct(id);
+      setProductData(product);
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +50,7 @@ export default function PoleView() {
           {productData.name}
         </Typography>
         <Box sx={{ py: 2 }}>
-          <PoleGrid poles={productData} />
+          <PhotoGrid photos={productData} />
         </Box>
 
         <Typography
@@ -69,7 +75,13 @@ export default function PoleView() {
         <Divider sx={{ mb: 4 }} />
 
         <SpecsGrid field="SIZE" value={sizes.join(", ")} />
-        <SpecsGrid field="COLOR" value={colors.sort().join(", ")} />
+        <SpecsGrid field="CATEGORY" value={category} />
+        <SpecsGrid field="ROCKER" value={rocker} />
+        <SpecsGrid field="CORE" value={core} />
+        <SpecsGrid field="BASE" value={base} />
+        <SpecsGrid field="AGE" value={age} />
+        <SpecsGrid field="GENDER" value={genders.join(", ")} />
+        <SpecsGrid field="SKIING LEVEL" value={skiingLevels.join(", ")} />
       </Container>
     </main>
   );

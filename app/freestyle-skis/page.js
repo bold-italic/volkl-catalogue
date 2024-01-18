@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Banner from "@/components/layout/banner";
-import { getAllProducts } from "@/lib/actions/ski-actions";
+import { getAllProducts } from "@/lib/actions/product-actions";
 import ProductGrid from "@/components/product-grid";
 import Sort from "@/components/sort";
 
@@ -20,11 +20,12 @@ export default function Freestyle({ searchParams }) {
 
   const fetchProducts = async () => {
     try {
-      const { skis } = await getAllProducts({
+      const { products } = await getAllProducts({
         ...searchParams,
+        tag: "skis",
         category: "Freestyle",
       });
-      setProducts(skis);
+      setProducts(products);
     } catch (error) {
       console.log(error);
     }

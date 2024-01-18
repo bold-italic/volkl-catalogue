@@ -3,8 +3,8 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 
-export default function BindingGrid({ bindings }) {
-  const images = bindings.image || [];
+export default function PhotoGrid({ photos }) {
+  const images = photos.image || [];
 
   return (
     <Grid container spacing={2}>
@@ -18,7 +18,7 @@ export default function BindingGrid({ bindings }) {
             }}
           >
             <CardActionArea>
-              <CardMedia component="img" image={image} alt={bindings.name} />
+              <CardMedia component="img" image={image} alt={photos.name} />
             </CardActionArea>
           </Card>
         </Grid>
