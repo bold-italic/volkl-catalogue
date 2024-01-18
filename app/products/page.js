@@ -31,8 +31,7 @@ export default function AllProducts({ searchParams }) {
 
   return (
     <main>
-      <Banner bannerName="1" />
-      <Container sx={{ pb: 6 }} maxWidth="xl">
+      <Container sx={{ py: 6 }} maxWidth="xl">
         <Box sx={{ flexGrow: 1 }}>
           <Box
             sx={{
