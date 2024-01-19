@@ -23,6 +23,10 @@ export default function ProductView() {
   const age = productData.age || [];
   const genders = productData.gender || [];
   const skiingLevels = productData.skiingLevel || [];
+  const colors = productData.color || [];
+  const bindingCategory = productData.bindingCategory || [];
+  const bindingWeight = productData.bindingWeight || [];
+  const range = productData.range || [];
 
   useEffect(() => {
     fetchProduct();
@@ -74,14 +78,36 @@ export default function ProductView() {
         </Typography>
         <Divider sx={{ mb: 4 }} />
 
-        <SpecsGrid field="SIZE" value={sizes.join(", ")} />
-        <SpecsGrid field="CATEGORY" value={category} />
-        <SpecsGrid field="ROCKER" value={rocker} />
-        <SpecsGrid field="CORE" value={core} />
-        <SpecsGrid field="BASE" value={base} />
-        <SpecsGrid field="AGE" value={age} />
-        <SpecsGrid field="GENDER" value={genders.join(", ")} />
-        <SpecsGrid field="SKIING LEVEL" value={skiingLevels.join(", ")} />
+        {productData.tag === "skis" && (
+          <>
+            <SpecsGrid field="SIZE" value={sizes.join(", ")} />
+            <SpecsGrid field="CATEGORY" value={category} />
+            <SpecsGrid field="ROCKER" value={rocker} />
+            <SpecsGrid field="CORE" value={core} />
+            <SpecsGrid field="BASE" value={base} />
+            <SpecsGrid field="AGE" value={age} />
+            <SpecsGrid field="GENDER" value={genders.join(", ")} />
+            <SpecsGrid field="SKIING LEVEL" value={skiingLevels.join(", ")} />
+          </>
+        )}
+
+        {productData.tag === "bindings" && (
+          <>
+            <SpecsGrid field="SIZE" value={sizes.join(", ")} />
+            <SpecsGrid field="COLOR" value={colors.sort().join(", ")} />
+            <SpecsGrid field="CATEGORY" value={bindingCategory} />
+            <SpecsGrid field="AGE" value={age} />
+            <SpecsGrid field="BINDING WEIGHT" value={bindingWeight} />
+            <SpecsGrid field="DIN/ISO RANGE" value={range} />
+          </>
+        )}
+
+        {productData.tag === "poles" && (
+          <>
+            <SpecsGrid field="SIZE" value={sizes.join(", ")} />
+            <SpecsGrid field="COLOR" value={colors.sort().join(", ")} />
+          </>
+        )}
       </Container>
     </main>
   );
