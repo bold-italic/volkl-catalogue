@@ -20,7 +20,6 @@ export default function ProductGrid({ products }) {
           component={Link}
           href={{
             pathname: `/products/${product?._id}`,
-            query: { name: product?.name },
           }}
           sx={{
             textDecoration: "unset",
