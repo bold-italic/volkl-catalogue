@@ -2,7 +2,6 @@
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
 import logo from "../../assets/logo.svg";
 import useCustomRouter from "../useCustomRouter";
 

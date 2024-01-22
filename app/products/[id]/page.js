@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { getOneProduct } from "@/lib/actions/product-actions";
+import { getOneProduct } from "@/lib/product-actions";
 import PhotoGrid from "@/components/photo-grid";
 import SpecsGrid from "@/components/specs-grid";
 
