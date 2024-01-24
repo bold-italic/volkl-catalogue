@@ -10,23 +10,29 @@ import Typography from "@mui/material/Typography";
 
 export default function AllProducts({ searchParams }) {
   const [products, setProducts] = useState([]);
+  const [sort, setSort] = useState("");
 
   const fetchProducts = useCallback(async () => {
     try {
       const { products } = await getAllProducts({
         ...searchParams,
+        sort,
       });
       setProducts(products);
     } catch (error) {
       console.log(error);
     }
-  }, [searchParams]);
+  }, [searchParams, sort]);
 
   useEffect(() => {
     fetchProducts();
     // Scroll to the top when the component mounts
     window.scrollTo(0, 0);
   }, [fetchProducts]);
+
+  const handleSortChange = (selectedSort) => {
+    setSort(selectedSort);
+  };
 
   return (
     <main>
@@ -44,7 +50,7 @@ export default function AllProducts({ searchParams }) {
               {products.length} Items
             </Typography>
             <Box>
-              <Sort />
+              <Sort onSortChange={handleSortChange} />
             </Box>
           </Box>
           <ProductGrid products={products} />
