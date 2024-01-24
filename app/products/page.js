@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { getAllProducts } from "@/lib/product-actions";
 import ProductGrid from "@/components/product-grid";
 import Sort from "@/components/sort";
@@ -11,13 +11,7 @@ import Typography from "@mui/material/Typography";
 export default function AllProducts({ searchParams }) {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    fetchProducts();
-    // Scroll to the top when the component mounts
-    window.scrollTo(0, 0);
-  }, [searchParams]);
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       const { products } = await getAllProducts({
         ...searchParams,
@@ -26,7 +20,13 @@ export default function AllProducts({ searchParams }) {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [searchParams]);
+
+  useEffect(() => {
+    fetchProducts();
+    // Scroll to the top when the component mounts
+    window.scrollTo(0, 0);
+  }, [fetchProducts]);
 
   return (
     <main>

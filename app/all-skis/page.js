@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Banner from "@/components/layout/banner";
 import { getAllProducts } from "@/lib/product-actions";
 import ProductGrid from "@/components/product-grid";
@@ -12,13 +12,7 @@ import Typography from "@mui/material/Typography";
 export default function AllSkis({ searchParams }) {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    fetchProducts();
-    // Scroll to the top when the component mounts
-    window.scrollTo(0, 0);
-  }, [searchParams]);
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       const { products } = await getAllProducts({
         ...searchParams,
@@ -28,7 +22,13 @@ export default function AllSkis({ searchParams }) {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [searchParams]);
+
+  useEffect(() => {
+    fetchProducts();
+    // Scroll to the top when the component mounts
+    window.scrollTo(0, 0);
+  }, [fetchProducts]);
 
   return (
     <main>

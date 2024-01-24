@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { getOneProduct } from "@/lib/product-actions";
 import PhotoGrid from "@/components/photo-grid";
@@ -28,20 +28,20 @@ export default function ProductView() {
   const bindingWeight = productData.bindingWeight || [];
   const range = productData.range || [];
 
-  useEffect(() => {
-    fetchProduct();
-    // Scroll to the top when the component mounts
-    window.scrollTo(0, 0);
-  }, [id]);
-
-  const fetchProduct = async () => {
+  const fetchProduct = useCallback(async () => {
     try {
       const product = await getOneProduct(id);
       setProductData(product);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchProduct();
+    // Scroll to the top when the component mounts
+    window.scrollTo(0, 0);
+  }, [fetchProduct]);
 
   return (
     <main>

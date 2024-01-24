@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import main_banner from "@/assets/01-main_banner.webp";
 import racing_banner from "@/assets/02-racing_banner.webp";
@@ -111,10 +112,11 @@ function BannerHandler({ bannerId }) {
     <div>
       <Container maxWidth="string" style={containerStyle}>
         <Paper elevation={7} style={bannerContainerStyle}>
-          <img
-            key={selectedBanner.id}
-            src={selectedBanner.image.src}
+          <Image
+            src={selectedBanner.image}
             alt={selectedBanner.alt}
+            width={1000}
+            height={500}
             style={bannerImageStyle}
           />
         </Paper>
