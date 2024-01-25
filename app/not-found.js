@@ -18,7 +18,7 @@ export default function NotFound() {
           PAGE NOT FOUND
         </Typography>
         <Typography variant="h6" align="center" sx={{ py: 3 }}>
-          Sorry, we couldn't connect you to the page you are looking for
+          Sorry, we could not connect you to the page you are looking for
         </Typography>
       </Container>
     </main>
