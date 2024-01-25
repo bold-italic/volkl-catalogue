@@ -362,6 +362,8 @@ export default function Header() {
                 <InputBase
                   type="search"
                   name="search"
+                  autoFocus
+                  required
                   sx={{ ml: 1, flex: 1 }}
                   placeholder="Search..."
                   inputProps={{ "aria-label": "search" }}

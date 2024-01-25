@@ -6,8 +6,16 @@
 
 body {
   font-family: "Open Sans", "Lato", sans-serif;
-  margin: 0;
   background: #f7f7f6;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Set the minimum height of the body to 100% of the viewport height */
+}
+
+main {
+  flex: 1; /* Make the main content area flexible to fill the available space */
 }
 
 h1,
