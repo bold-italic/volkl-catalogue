@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../assets/logo.svg";
-import useCustomRouter from "../useCustomRouter";
+import { useRouter } from "next/navigation";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -79,7 +79,7 @@ export default function Header() {
   const [isSearch, setIsSearch] = useState(false);
 
   const formRef = useRef();
-  const { pushQuery, query } = useCustomRouter();
+  const router = useRouter();
 
   const open = Boolean(anchorEl);
 
@@ -114,11 +114,11 @@ export default function Header() {
   const handleSearch = (formData) => {
     const search = formData.get("search");
     formRef.current.reset();
-    pushQuery({ search });
     setIsSearch(false);
-  };
 
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+    // Use the push function from the router to redirect to the products page with the search query
+    router.push(`/products?search=${encodeURIComponent(search)}`);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -365,7 +365,6 @@ export default function Header() {
                 <InputBase
                   type="search"
                   name="search"
-                  defaultValue={query.search || ""}
                   sx={{ ml: 1, flex: 1 }}
                   placeholder="Search..."
                   inputProps={{ "aria-label": "search" }}
