@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { getOneProduct } from "@/lib/product-actions";
 import PhotoGrid from "@/components/photo-grid";
 import SpecsGrid from "@/components/specs-grid";
@@ -11,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 
 export default function ProductView() {
+  const router = useRouter();
   const pathname = usePathname();
   const id = pathname.split("/")[2];
 
@@ -34,6 +36,13 @@ export default function ProductView() {
     try {
       setLoading(true);
       const product = await getOneProduct(id);
+
+      if (!product) {
+        // Product not found, redirect to the not-found page
+        router.push("/app/not-found");
+        return;
+      }
+
       setProductData(product);
     } catch (error) {
       console.log(error);
@@ -52,7 +61,7 @@ export default function ProductView() {
     <main>
       {loading ? (
         ""
-      ) : (
+      ) : productData.name ? (
         <div>
           <Container sx={{ py: 6 }} maxWidth="xl">
             <Typography
@@ -122,6 +131,8 @@ export default function ProductView() {
             )}
           </Container>
         </div>
+      ) : (
+        <div>{router.push("/app/not-found")}</div>
       )}
     </main>
   );
