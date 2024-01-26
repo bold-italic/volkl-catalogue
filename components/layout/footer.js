@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 const footerItems = [
   { label: "ABOUT AS", link: "#" },
   { label: "INNOVATIONS", link: "#" },
-  { label: "CAREERS", link: "#" },
+  { label: "TEAM", link: "#" },
   { label: "CONTACT US", link: "#" },
 ];
 
