@@ -64,7 +64,11 @@ export default function AllProducts() {
             }}
           >
             <Typography variant="h5" align="center">
-              {loading ? "Loading..." : showProducts ? `${products.length} Items` : ""}
+              {loading
+                ? "Loading..."
+                : showProducts
+                ? `${products.length} Items`
+                : ""}
             </Typography>
             <Box>
               <Sort onSortChange={handleSortChange} />

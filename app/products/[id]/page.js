@@ -14,6 +14,8 @@ export default function ProductView() {
   const pathname = usePathname();
   const id = pathname.split("/")[2];
 
+  const [loading, setLoading] = useState(true);
+
   const [productData, setProductData] = useState({});
   const sizes = productData.size || [];
   const category = productData.category || [];
@@ -30,10 +32,13 @@ export default function ProductView() {
 
   const fetchProduct = useCallback(async () => {
     try {
+      setLoading(true);
       const product = await getOneProduct(id);
       setProductData(product);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }, [id]);
 
@@ -45,70 +50,79 @@ export default function ProductView() {
 
   return (
     <main>
-      <Container sx={{ py: 6 }} maxWidth="xl">
-        <Typography
-          gutterBottom
-          variant="h4"
-          sx={{ fontWeight: 800, letterSpacing: 1 }}
-        >
-          {productData.name}
-        </Typography>
-        <Box sx={{ py: 2 }}>
-          <PhotoGrid photos={productData} />
-        </Box>
+      {loading ? (
+        ""
+      ) : (
+        <div>
+          <Container sx={{ py: 6 }} maxWidth="xl">
+            <Typography
+              gutterBottom
+              variant="h4"
+              sx={{ fontWeight: 800, letterSpacing: 1 }}
+            >
+              {productData.name}
+            </Typography>
+            <Box sx={{ py: 2 }}>
+              <PhotoGrid photos={productData} />
+            </Box>
 
-        <Typography
-          gutterBottom
-          variant="h5"
-          sx={{ pt: 2, fontWeight: 800, letterSpacing: 1 }}
-        >
-          OVERVIEW
-        </Typography>
-        <Divider />
+            <Typography
+              gutterBottom
+              variant="h5"
+              sx={{ pt: 2, fontWeight: 800, letterSpacing: 1 }}
+            >
+              OVERVIEW
+            </Typography>
+            <Divider />
 
-        <Typography gutterBottom variant="h6" sx={{ py: 4 }}>
-          {productData.overview}
-        </Typography>
-        <Typography
-          gutterBottom
-          variant="h5"
-          sx={{ pt: 2, fontWeight: 800, letterSpacing: 1 }}
-        >
-          SPECIFICATIONS
-        </Typography>
-        <Divider sx={{ mb: 4 }} />
+            <Typography gutterBottom variant="h6" sx={{ py: 4 }}>
+              {productData.overview}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h5"
+              sx={{ pt: 2, fontWeight: 800, letterSpacing: 1 }}
+            >
+              SPECIFICATIONS
+            </Typography>
+            <Divider sx={{ mb: 4 }} />
 
-        {productData.tag === "skis" && (
-          <>
-            <SpecsGrid field="SIZE" value={sizes.join(", ")} />
-            <SpecsGrid field="CATEGORY" value={category} />
-            <SpecsGrid field="ROCKER" value={rocker} />
-            <SpecsGrid field="CORE" value={core} />
-            <SpecsGrid field="BASE" value={base} />
-            <SpecsGrid field="AGE" value={age} />
-            <SpecsGrid field="GENDER" value={genders.join(", ")} />
-            <SpecsGrid field="SKIING LEVEL" value={skiingLevels.join(", ")} />
-          </>
-        )}
+            {productData.tag === "skis" && (
+              <>
+                <SpecsGrid field="SIZE" value={sizes.join(", ")} />
+                <SpecsGrid field="CATEGORY" value={category} />
+                <SpecsGrid field="ROCKER" value={rocker} />
+                <SpecsGrid field="CORE" value={core} />
+                <SpecsGrid field="BASE" value={base} />
+                <SpecsGrid field="AGE" value={age} />
+                <SpecsGrid field="GENDER" value={genders.join(", ")} />
+                <SpecsGrid
+                  field="SKIING LEVEL"
+                  value={skiingLevels.join(", ")}
+                />
+              </>
+            )}
 
-        {productData.tag === "bindings" && (
-          <>
-            <SpecsGrid field="SIZE" value={sizes.join(", ")} />
-            <SpecsGrid field="COLOR" value={colors.sort().join(", ")} />
-            <SpecsGrid field="CATEGORY" value={bindingCategory} />
-            <SpecsGrid field="AGE" value={age} />
-            <SpecsGrid field="BINDING WEIGHT" value={bindingWeight} />
-            <SpecsGrid field="DIN/ISO RANGE" value={range} />
-          </>
-        )}
+            {productData.tag === "bindings" && (
+              <>
+                <SpecsGrid field="SIZE" value={sizes.join(", ")} />
+                <SpecsGrid field="COLOR" value={colors.sort().join(", ")} />
+                <SpecsGrid field="CATEGORY" value={bindingCategory} />
+                <SpecsGrid field="AGE" value={age} />
+                <SpecsGrid field="BINDING WEIGHT" value={bindingWeight} />
+                <SpecsGrid field="DIN/ISO RANGE" value={range} />
+              </>
+            )}
 
-        {productData.tag === "poles" && (
-          <>
-            <SpecsGrid field="SIZE" value={sizes.join(", ")} />
-            <SpecsGrid field="COLOR" value={colors.sort().join(", ")} />
-          </>
-        )}
-      </Container>
+            {productData.tag === "poles" && (
+              <>
+                <SpecsGrid field="SIZE" value={sizes.join(", ")} />
+                <SpecsGrid field="COLOR" value={colors.sort().join(", ")} />
+              </>
+            )}
+          </Container>
+        </div>
+      )}
     </main>
   );
 }
