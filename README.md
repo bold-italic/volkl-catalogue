@@ -1,10 +1,10 @@
-# VÖLKL Skis catalogue project
+# VÖLKL Ski Catalogue project
 
-The Völkl Skis catalogue redesign project.
+The Völkl Ski Catalogue redesign project.
 
 ## Description
 
-The Full Stack `Next.js` application for the redesigned Völkl skis catalogue seamlessly integrates `Next.js` for robust frontend development, `MongoDB` as the database backend, `Material UI` for a modern and responsive user interface, and leverages `Cloudinary` for efficient image management and delivery.
+The Full Stack `Next.js` application for the redesigned Völkl ski catalogue seamlessly integrates `Next.js` for robust frontend development, `MongoDB` as the database backend, `Material UI` for a modern and responsive user interface, and leverages `Cloudinary` for efficient image management and delivery.
 
 ## Demo
 
